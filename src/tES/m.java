@@ -1,7 +1,12 @@
 package tES;
 
-import Observables.Detective;
-import Observables.Subject;
+
+
+import BehaviouralPattern.Observables.ColdDetective;
+import BehaviouralPattern.Observables.Detective;
+import BehaviouralPattern.Observables.Subject;
+import StructuralPattern.Factory.SubjectFactory;
+
 
 public class m {
 
@@ -10,15 +15,38 @@ public class m {
 	private final Object lock = new Object();
 	
 	public static void main(String[] args) {
+		//COLD DETECTIVE
+		SubjectFactory<String> factory = new SubjectFactory<String>();
+		Subject<String> coldS = factory.createColdSubject();
+		ColdDetective<String> cd = new ColdDetective<String>("cold det");
+		coldS.emitEvent("TEST1");
+		coldS.emitEvent("TEST2");
+		coldS.subscribe(cd);
+		coldS.emitEvent("TEST3");
 
-		Subject<String> sub = new Subject<>();
-		Detective<String> det1 = new Detective<>("Det1!");
-		Detective<String> det2 = new Detective<>("Det2!");
-		sub.subscribe(det1);
-		sub.subscribe(det2);
-		sub.emitEvent("HELLO!");
-		sub.unsubscribe(det1);
-		sub.emitEvent("THIS IS ME second");
+		cd.workAll();
+		
+		//FACTORY WITH OBSERVABLES
+//		SubjectFactory<String> factory = new SubjectFactory<String>();
+//		Subject<String> coldS = factory.createColdSubject();
+//		coldS.emitEvent("TEST1");
+//		coldS.emitEvent("TEST2");
+//		coldS.emitEvent("TEST3");
+//		Detective<String> det1 = new Detective<>("Det1!");
+//		Detective<String> det2 = new Detective<>("Det2!");
+//		coldS.subscribe(det1);
+//		coldS.subscribe(det2);
+//		coldS.emitEvent("TEST4");
+		
+		//SIMPLE OBSERVER AND OBSERVABLE EXAMPLE
+//		Subject<String> sub = new Subject<>();
+//		Detective<String> det1 = new Detective<>("Det1!");
+//		Detective<String> det2 = new Detective<>("Det2!");
+//		sub.subscribe(det1);
+//		sub.subscribe(det2);
+//		sub.emitEvent("HELLO!");
+//		sub.unsubscribe(det1);
+//		sub.emitEvent("THIS IS ME second");
 		
 		
 		// THREADING CONSUMER PRODUCER PROBLEM
