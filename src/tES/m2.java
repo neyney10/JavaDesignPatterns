@@ -1,10 +1,8 @@
 package tES;
 
-import java.util.Observable;
 
-import BehaviouralPattern.Observables.Detective;
-import BehaviouralPattern.Observables.Subject;
-import StructuralPattern.Factory.SubjectFactory;
+import behaviouralPattern.observables.*;
+import structuralPattern.factory.*;
 
 public class m2 {
 

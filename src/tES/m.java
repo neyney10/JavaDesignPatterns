@@ -2,10 +2,9 @@ package tES;
 
 
 
-import BehaviouralPattern.Observables.ColdDetective;
-import BehaviouralPattern.Observables.Detective;
-import BehaviouralPattern.Observables.Subject;
-import StructuralPattern.Factory.SubjectFactory;
+
+import behaviouralPattern.observables.*;
+import structuralPattern.factory.*;
 
 
 public class m {
@@ -19,13 +18,18 @@ public class m {
 		SubjectFactory<String> factory = new SubjectFactory<String>();
 		Subject<String> coldS = factory.createColdSubject();
 		ColdDetective<String> cd = new ColdDetective<String>("cold det");
+		ColdDetective<String> cd2 = new ColdDetective<String>("cold det2");
+		
 		coldS.emitEvent("TEST1");
 		coldS.emitEvent("TEST2");
 		coldS.subscribe(cd);
 		coldS.emitEvent("TEST3");
-
-		cd.workAll();
+		coldS.emitEvent("TEST4");
+		coldS.emitEvent("TEST5");
+		coldS.subscribe(cd2);
 		
+		cd.workAll();
+		cd2.workAll();
 		//FACTORY WITH OBSERVABLES
 //		SubjectFactory<String> factory = new SubjectFactory<String>();
 //		Subject<String> coldS = factory.createColdSubject();
