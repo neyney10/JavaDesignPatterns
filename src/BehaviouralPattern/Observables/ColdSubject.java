@@ -40,6 +40,18 @@ public class ColdSubject<T> extends Subject<T> {
 	}
 	
 	/**
+	 * [Constructor] <br>
+	 * Creates a new "ColdSubject" object, initializing the data structure that will contain observers,
+	 * and initializing the queue of recent events, the constructor receives recent amount argument as the maximum
+	 * amount of recent events to keep in storage.
+	 * @param recents - the amount of recent events to keep.
+	 */
+	public ColdSubject(int recents) {
+		this();
+		this.amountOfRecent = recents;
+	}
+	
+	/**
 	 * subscribing an observer to this observable, when subscribed, the observer will get notified about events. <br>
 	 * this works the same as Hot Observable, the only change that upon subscribing, the observer will be notified
 	 * about recent events too.

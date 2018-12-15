@@ -30,9 +30,15 @@ public final class mySingleton {
 	public static void main(String[] args) {
 		mySingleton s = mySingleton.getInstance();
 		s.setNum(25);
+		System.out.println(s.getNum());
+		
 		
 		mySingleton s2 = mySingleton.getInstance();
 		System.out.println(s2.getNum());
+		s2.setNum(33);
+		
+		mySingleton s3 = mySingleton.getInstance();
+		System.out.println(s3.getNum());
 	}
 	
 	

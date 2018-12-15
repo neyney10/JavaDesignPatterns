@@ -1,11 +1,13 @@
 package tES;
 
-
-
-
 import behaviouralPattern.observables.*;
-import structuralPattern.factory.*;
-
+import behaviouralPattern.state.ClosedState;
+import behaviouralPattern.state.myConsolePrinter;
+import creationalPattern.factory.*;
+import structuralPattern.flyweight.Flyweight;
+import structuralPattern.flyweight.Type;
+import structuralPattern.proxy.ProxyConsole;
+import structuralPattern.proxy.RealConsole;
 
 public class m {
 
@@ -14,12 +16,35 @@ public class m {
 	private final Object lock = new Object();
 	
 	public static void main(String[] args) {
+		// state
+		myConsolePrinter consolePrinter = new myConsolePrinter();
+		consolePrinter.printMyText("Hello!");
+		consolePrinter.setState(new ClosedState());
+		consolePrinter.printMyText("Hello again!");
+		
+		// proxy - protection proxy
+		ProxyConsole console1 = new ProxyConsole(new RealConsole());
+		ProxyConsole console2 = new ProxyConsole(new RealConsole());
+		console1.print("Hello World");
+		console1.print("This is the first proxy");
+		console2.print("Hello World");
+		console2.print("This is the second proxy");
+		
+		console1.print("this is a HATE sentence");
+		
+		
+		// flyweight
+		System.out.println(Flyweight.getString(Type.head));
+		System.out.println(Flyweight.getString(Type.body));
+		System.out.println(Flyweight.getString(Type.footer));
+		
+		
 		//COLD DETECTIVE
 		SubjectFactory<String> factory = new SubjectFactory<String>();
 		Subject<String> coldS = factory.createColdSubject();
 		ColdDetective<String> cd = new ColdDetective<String>("cold det");
 		ColdDetective<String> cd2 = new ColdDetective<String>("cold det2");
-		
+
 		coldS.emitEvent("TEST1");
 		coldS.emitEvent("TEST2");
 		coldS.subscribe(cd);
@@ -30,6 +55,7 @@ public class m {
 		
 		cd.workAll();
 		cd2.workAll();
+		
 		//FACTORY WITH OBSERVABLES
 //		SubjectFactory<String> factory = new SubjectFactory<String>();
 //		Subject<String> coldS = factory.createColdSubject();

@@ -2,7 +2,7 @@ package tES;
 
 
 import behaviouralPattern.observables.*;
-import structuralPattern.factory.*;
+import creationalPattern.factory.*;
 
 public class m2 {
 
