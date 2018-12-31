@@ -1,8 +1,15 @@
 package tES;
 
+import java.util.LinkedList;
+
 import behaviouralPattern.observables.*;
 import behaviouralPattern.state.ClosedState;
 import behaviouralPattern.state.myConsolePrinter;
+import behaviouralPattern.visitor.Manager;
+import behaviouralPattern.visitor.PersonVisitor;
+import behaviouralPattern.visitor.Visitable;
+import behaviouralPattern.visitor.Visitor;
+import behaviouralPattern.visitor.Worker;
 import creationalPattern.factory.*;
 import structuralPattern.flyweight.Flyweight;
 import structuralPattern.flyweight.Type;
@@ -16,6 +23,27 @@ public class m {
 	private final Object lock = new Object();
 	
 	public static void main(String[] args) {
+		// Visitor
+		LinkedList<Visitable> persons = new LinkedList<>();
+		Worker w1 = new Worker(1000,200);
+		Worker w2 = new Worker(2312, 500);
+		Manager man1 = new Manager(3000,333);
+		
+		persons.add(w1);
+		persons.add(w2);
+		persons.add(man1);
+		
+		Visitor myVisitor = new PersonVisitor();
+		
+		persons.forEach((person) -> System.out.println(person.accept(myVisitor)));
+		
+		float totalCompanyMoneySpent = 0;
+		for (Visitable person : persons) {
+			totalCompanyMoneySpent += person.accept(myVisitor);
+		}
+		
+		System.out.println("Total company HR cost: "+totalCompanyMoneySpent);
+		
 		// state
 		myConsolePrinter consolePrinter = new myConsolePrinter();
 		consolePrinter.printMyText("Hello!");
