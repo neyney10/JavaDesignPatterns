@@ -12,5 +12,10 @@ public class PersonVisitor implements Visitor {
 	public float visit(Manager manager) {
 		return manager.getSalary() +  manager.getBonus();
 	}
+	
+	@Override
+	public float visit(ExternalWorker externalWorker) {
+		return (externalWorker.getSalary() +  externalWorker.getExpertCost())*(1-externalWorker.getTax());
+	}
 
 }

@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import behaviouralPattern.observables.*;
 import behaviouralPattern.state.ClosedState;
 import behaviouralPattern.state.myConsolePrinter;
+import behaviouralPattern.visitor.ExternalWorker;
 import behaviouralPattern.visitor.Manager;
 import behaviouralPattern.visitor.PersonVisitor;
 import behaviouralPattern.visitor.Visitable;
@@ -15,6 +16,7 @@ import structuralPattern.flyweight.Flyweight;
 import structuralPattern.flyweight.Type;
 import structuralPattern.proxy.ProxyConsole;
 import structuralPattern.proxy.RealConsole;
+import sun.management.ExtendedPlatformComponent;
 
 public class m {
 
@@ -27,15 +29,19 @@ public class m {
 		LinkedList<Visitable> persons = new LinkedList<>();
 		Worker w1 = new Worker(1000,200);
 		Worker w2 = new Worker(2312, 500);
+		ExternalWorker ew1 = new ExternalWorker(1500, 300, 0.18f);
 		Manager man1 = new Manager(3000,333);
 		
 		persons.add(w1);
 		persons.add(w2);
+		persons.add(ew1);
 		persons.add(man1);
 		
 		Visitor myVisitor = new PersonVisitor();
 		
-		persons.forEach((person) -> System.out.println(person.accept(myVisitor)));
+		persons.forEach((person) -> 
+			System.out.println("Total money given to this person: " +person.accept(myVisitor))
+		);
 		
 		float totalCompanyMoneySpent = 0;
 		for (Visitable person : persons) {
